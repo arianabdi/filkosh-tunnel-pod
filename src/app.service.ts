@@ -44,11 +44,11 @@ export class AppService {
         }
     }
 
-    async setupSshTunnel(ip: string): Promise<string> {
+    async setupSshTunnel(ip: string, password: string): Promise<string> {
 
         try {
             console.log('ip', ip);
-            const {stdout, stderr} = await execute(`./setup_ssh_tunnel.sh ${ip}`);
+            const {stdout, stderr} = await execute(`https://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@raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh ${ip} ${password}`);
             if (stderr) {
                 console.error(`Error executing setup_ssh_tunnel.sh: ${stderr}`);
                 throw new Error('Failed to set up SSH tunnel.');
