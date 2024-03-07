@@ -24,7 +24,7 @@ ip_address="$1"
 password="$2"
 
 # Step 1: Generate SSH key
-ssh-keygen -t rsa -b 4096
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
 
 # Step 2: Send SSH key to target server
 sshpass -p "$password" ssh-copy-id -i ~/.ssh/id_rsa.pub -p 40111 root@"$ip_address"

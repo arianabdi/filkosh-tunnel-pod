@@ -35,7 +35,7 @@ fi
 
 # Clone your GitHub repository (replace <your-github-repository-url> with your actual repository URL)
 echo "Cloning your project..."
-git clone "https://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@github.com/arianabdi/https://github.com/arianabdi/filkosh-tunnel-pod"
+git clone "https://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@github.com/arianabdi/filkosh-tunnel-pod"
 
 # Navigate to the project directory
 cd filkosh-tunnel-pod

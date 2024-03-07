@@ -1,0 +1,12 @@
+{
+  "platform": "docker",
+  "image": "ubuntu:latest",
+  "app": "mimijoon",
+  "port": 8080,
+  "disks": [
+    {
+      "name": "disk",
+      "mountTo": "/data.ms"
+    }
+  ]
+}
