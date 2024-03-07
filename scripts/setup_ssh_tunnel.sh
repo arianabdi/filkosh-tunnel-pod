@@ -27,7 +27,7 @@ password="$2"
 ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa -q
 
 # Step 2: Send SSH key to target server
-sshpass -p "$password" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ssh-copy-id -i ~/.ssh/id_rsa.pub -p 40111 root@"$ip_address"
+sshpass -p "$password" ssh-copy-id -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  -i ~/.ssh/id_rsa.pub -p 40111 root@"$ip_address"
 
 # Step 3: Create SSH tunnel to target server
 ssh -f -N -L 0.0.0.0:40111:"$ip_address":40111 root@"$ip_address" -p40111
