@@ -1,89 +1,89 @@
 /* eslint-disable prettier/prettier */
-import { HttpStatus, Injectable } from '@nestjs/common';
+import {HttpStatus, Injectable} from '@nestjs/common';
 import {exec} from 'child_process';
 import {promisify} from 'util';
-import axios from "axios";
 
 
 const execute = promisify(exec);
 
 export class httpResponseHelperModel {
-  res: any
-  data: any;
-  message?: string;
+    res: any
+    data: any;
+    message?: string;
 }
 
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
-  }
-
-
-
-  // const {stdout, stderr} = await execute(command);
-  // console.log(`Script output: ${JSON.stringify(stdout)}`);
-  // console.error(`Script errors: ${stderr}`);
-
-  // // Handle the success and send an appropriate response
-  // return {success: true, message: 'Users created and passwords changed successfully.'};
-
-
-  async getSSHTunnelPID(): Promise<string> {
-
-    try {
-        const { stdout, stderr } = await execute('./check_ssh_tunnel_pid.sh');
-        if (stderr) {
-            console.error(`Error executing script: ${stderr}`);
-            throw new Error(stderr);
-        }
-        console.log(`Script output: ${stdout}`);
-        return stdout;
-    } catch (error) {
-        console.error(`Error executing script: ${error}`);
-        throw error;
+    getHello(): string {
+        return 'Hello World!';
     }
-  }
 
-  async setupSshTunnel(ip: string): Promise<string> {
 
-    try {
-      const { stdout, stderr } = await execute(`./setup_ssh_tunnel.sh ${ip}`);
-      if (stderr) {
-        console.error(`Error executing setup_ssh_tunnel.sh: ${stderr}`);
-        throw new Error('Failed to set up SSH tunnel.');
-      }
-      console.log(`Output: ${stdout}`);
-      return 'SSH tunnel setup successful.';
-    } catch (error) {
-        console.error(`Error setting up SSH tunnel: ${error}`);
-        throw new Error('Failed to set up SSH tunnel.');
-    }
-  }
-  static async httpResponseHelper(response: httpResponseHelperModel) {
-    return response.res.status(HttpStatus.OK).json({
-        data: response.data,
-        statusCode: HttpStatus.OK,
-        message: response.message,
-        meta: {
-            date: new Date()
+    // const {stdout, stderr} = await execute(command);
+    // console.log(`Script output: ${JSON.stringify(stdout)}`);
+    // console.error(`Script errors: ${stderr}`);
+
+    // // Handle the success and send an appropriate response
+    // return {success: true, message: 'Users created and passwords changed successfully.'};
+
+
+    async getSSHTunnelPID(): Promise<string> {
+
+        try {
+            const {stdout, stderr} = await execute('./check_ssh_tunnel_pid.sh');
+            if (stderr) {
+                console.error(`Error executing script: ${stderr}`);
+                throw new Error(stderr);
+            }
+            console.log(`Script output: ${stdout}`);
+            return stdout;
+        } catch (error) {
+            console.error(`Error executing script: ${error}`);
+            throw error;
         }
-    })
+    }
 
-}
+    async setupSshTunnel(ip: string): Promise<string> {
 
+        try {
+            console.log('ip', ip);
+            const {stdout, stderr} = await execute(`./setup_ssh_tunnel.sh ${ip}`);
+            if (stderr) {
+                console.error(`Error executing setup_ssh_tunnel.sh: ${stderr}`);
+                throw new Error('Failed to set up SSH tunnel.');
+            }
+            console.log(`Output: ${stdout}`);
+            return 'SSH tunnel setup successful.';
+        } catch (error) {
+            console.error(`Error setting up SSH tunnel: ${error}`);
+            throw new Error('Failed to set up SSH tunnel.');
+        }
+    }
 
-static async errorHelper(res, error) {
-    return res.status(error.status ? error.status : HttpStatus.BAD_REQUEST).json(
-        {
-            "statusCode": error.status,
-            "message": error.message,
-            "meta": {
+    static async httpResponseHelper(response: httpResponseHelperModel) {
+        return response.res.status(HttpStatus.OK).json({
+            data: response.data,
+            statusCode: HttpStatus.OK,
+            message: response.message,
+            meta: {
                 date: new Date()
             }
-        }
-    )
-}
+        })
+
+    }
+
+
+    static async errorHelper(res, error) {
+        return res.status(error.status ? error.status : HttpStatus.BAD_REQUEST).json(
+            {
+                "statusCode": error.status,
+                "message": error.message,
+                "meta": {
+                    date: new Date()
+                }
+            }
+        )
+    }
 
 }

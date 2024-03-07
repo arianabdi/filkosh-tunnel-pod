@@ -19,6 +19,15 @@ export class AppController {
           await AppService.errorHelper(res, e);
       }
   }
+  @Get('setup')
+  async setupSSHTunnel(@Res() res, @Body() body: { ip: string }) {
+      try {
+        const data = await this.appService.setupSshTunnel(body.ip);
+        await AppService.httpResponseHelper({res: res, data: {message: '', data: data}, message: ""});
+      }catch (e){
+          await AppService.errorHelper(res, e);
+      }
+  }
 
   @Post('set_users')
   async set_users(@Res() res, @Body() body: TestModel2 ) {
