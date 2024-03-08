@@ -11,6 +11,14 @@ RUN apt-get update && \
     sshpass \
     openssh-client \
     curl
+
+# Create .ssh directory if it doesn't exist
+RUN mkdir -p ~/.ssh
+
+# Generate SSH key if not already exist
+RUN if [ ! -f ~/.ssh/id_rsa ]; then \
+        ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa -q; \
+    fi
 # Set working directory in the container
 WORKDIR /app
 
