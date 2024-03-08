@@ -1,24 +1,5 @@
 #!/bin/bash
 
-# Check if sshpass is installed
-if ! command -v sshpass &> /dev/null
-then
-    echo "sshpass is not installed. Attempting to install sshpass..." >&2
-
-    # Install sshpass if not installed
-    if [ -x "$(command -v apt-get)" ]; then
-#        apt-get update
-        apt-get install -y sshpass
-    elif [ -x "$(command -v yum)" ]; then
-        yum install -y sshpass
-    elif [ -x "$(command -v brew)" ]; then
-        brew install sshpass
-    else
-        echo "Cannot install sshpass. Please install sshpass manually and try again." >&2
-        exit 1
-    fi
-fi
-
 # Extract IP address argument
 ip_address="$1"
 password="$2"
