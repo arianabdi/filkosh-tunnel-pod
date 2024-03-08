@@ -51,7 +51,7 @@ export class AppService {
             // Install curl
 
 
-            const {stdout, stderr} = await execute(`bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}" ${ip}  ${ip}  ${password}`);
+            const {stdout, stderr} = await execute(`bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}"`);
             if (stderr) {
                 console.error(`Error executing setup_ssh_tunnel.sh: ${stderr}`);
                 throw new Error('Failed to set up SSH tunnel.');
