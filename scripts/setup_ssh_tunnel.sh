@@ -7,10 +7,10 @@ then
 
     # Install sshpass if not installed
     if [ -x "$(command -v apt-get)" ]; then
-        sudo apt-get update
-        sudo apt-get install -y sshpass
+#        apt-get update
+        apt-get install -y sshpass
     elif [ -x "$(command -v yum)" ]; then
-        sudo yum install -y sshpass
+        yum install -y sshpass
     elif [ -x "$(command -v brew)" ]; then
         brew install sshpass
     else
