@@ -53,7 +53,7 @@ export class AppService {
             await execute(`apt-get update`);
             await execute(`apt-get install -y curl`);
 
-            console.log(`Executing command: bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}"`);
+            console.log(`Executing command: bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}" ${ip} `);
 
             const {stdout, stderr} = await execute(`bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}"  `);
             if (stderr) {
