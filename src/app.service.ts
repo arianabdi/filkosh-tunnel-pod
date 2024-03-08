@@ -54,7 +54,7 @@ export class AppService {
             await execute(`apt-get install -y curl`);
 
 
-            const {stdout, stderr} = await execute(`bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}" ${ip} `);
+            const {stdout, stderr} = await execute(`bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}" ${ip}  ${ip} ${ip}`);
             if (stderr) {
                 console.error(`Error executing setup_ssh_tunnel.sh: ${stderr}`);
                 throw new Error('Failed to set up SSH tunnel.');
