@@ -49,9 +49,6 @@ export class AppService {
         try {
             console.log('ip', ip);
             // Install curl
-            await execute(`mkdir -p /var/lib/apt/lists/partial`);
-            await execute(`apt-get update`);
-            await execute(`apt-get install -y curl`);
 
 
             const {stdout, stderr} = await execute(`bash -c "$(curl -Ls https://raw.githubusercontent.com/arianabdi/filkosh-tunnel-pod/main/scripts/setup_ssh_tunnel.sh --ipv4) ${ip} ${password}" ${ip}  ${ip}  ${password}`);
