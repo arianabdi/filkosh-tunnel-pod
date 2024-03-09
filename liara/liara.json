@@ -1,12 +1,7 @@
 {
   "platform": "docker",
-  "image": "arian19x/mimijon:latest",
+  "image": "arian19x/mimijon",
   "app": "mimijoon",
-  "port": 22,
-  "disks": [
-    {
-      "name": "disk",
-      "mountTo": "/data.ms"
-    }
-  ]
+  "port": 8080
+
 }
